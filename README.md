@@ -13,7 +13,7 @@ The Elder Scrolls V: Skyrim을 플레이한 유저라면 누구나 익숙하고 
 
 ## 이 프로젝트를 하면서 어떤 기술을 사용했을까
 - Provider: 상태관리로 사용
-- Localizations: 다국어 관리 나중에 전세계 사용자가 사용하길 희망하며...
+- [Localizations](./log/localization.md): 다국어 관리 나중에 전세계 사용자가 사용하길 희망하며...
 - Location: 무엇을 쓸지는 나중에 생각하자.
     - ?
 - Alarm: 일단 생각중인거 Local Notifications
