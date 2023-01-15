@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:you_are_finally_awake/core/entity/create_destination_info.dart';
 import 'package:you_are_finally_awake/core/entity/location.dart';
+import 'package:you_are_finally_awake/presentation/widgets/destination_info_card.dart';
 import 'package:you_are_finally_awake/presentation/widgets/destination_info_provider.dart';
 
 class DestinationInfoList extends StatefulWidget {
@@ -29,13 +30,18 @@ class _DestinationInfoListState extends State<DestinationInfoList> {
                 child: ListView.builder(
                   itemCount: provider.destinationInfoList.length,
                   itemBuilder: (context, index) => InkWell(
-                    onTap: () {
+                    onLongPress: () {
                       provider
                           .deleteInfo(provider.destinationInfoList[index].id);
                     },
-                    child: Container(
-                      child: Text(provider.destinationInfoList[index].title),
+                    child: DestinationInfoCard(
+                      title: provider.destinationInfoList[index].title,
+                      location: provider.destinationInfoList[index].location,
                     ),
+                    // child: Container(
+                    //   child: Text(
+                    //       provider.destinationInfoList[index].id.toString()),
+                    // ),
                   ),
                 ),
               ),
