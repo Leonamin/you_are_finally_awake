@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:you_are_finally_awake/core/data/datasource/constants.dart';
 import 'package:you_are_finally_awake/core/entity/destination_info.dart';
 import 'package:you_are_finally_awake/core/entity/location.dart';
 import 'package:you_are_finally_awake/presentation/pages/home/home_page.dart';
@@ -10,6 +11,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(LocationAdapter());
   Hive.registerAdapter(DestinationInfoAdapter());
+  await Hive.openBox<DestinationInfo>(hiveBoxDestinationInfo);
 
   runApp(const MyApp());
 }
