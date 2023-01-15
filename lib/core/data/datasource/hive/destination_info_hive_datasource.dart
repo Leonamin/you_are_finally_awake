@@ -42,7 +42,7 @@ class DestinationInfoHiveDataSource {
     }
   }
 
-  Future<void> createInfo(CreateDestinationInfo createInfo) async {
+  Future<int> createInfo(CreateDestinationInfo createInfo) async {
     try {
       int incresedId = _getLastItemId() + 1;
       DestinationInfo newInfo = DestinationInfo(
@@ -53,12 +53,13 @@ class DestinationInfoHiveDataSource {
         periodicMinute: createInfo.periodicMinute,
       );
       await destinationInfoBox.put(newInfo.id, newInfo);
+      return newInfo.id;
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<void> updateInfo(int key, CreateDestinationInfo createInfo) async {
+  Future<int> updateInfo(int key, CreateDestinationInfo createInfo) async {
     try {
       DestinationInfo updateInfo = DestinationInfo(
         id: key,
@@ -68,6 +69,7 @@ class DestinationInfoHiveDataSource {
         periodicMinute: createInfo.periodicMinute,
       );
       await destinationInfoBox.put(updateInfo.id, updateInfo);
+      return updateInfo.id;
     } catch (e) {
       rethrow;
     }
