@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:go_router/go_router.dart';
+import 'package:you_are_finally_awake/presentation/router/routes.dart';
 import 'package:you_are_finally_awake/presentation/widgets/destination_info_list.dart';
 
 class HomePage extends StatelessWidget {
@@ -11,7 +11,9 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: DestinationInfoList(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.goNamed(destinationSettingPageName);
+        },
       ),
     );
   }

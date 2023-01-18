@@ -4,7 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:you_are_finally_awake/core/data/datasource/constants.dart';
 import 'package:you_are_finally_awake/core/entity/destination_info.dart';
 import 'package:you_are_finally_awake/core/entity/location.dart';
-import 'package:you_are_finally_awake/presentation/pages/home/home_page.dart';
+import 'package:you_are_finally_awake/presentation/router/main_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
 
       theme: ThemeData(
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       // ],
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: HomePage(),
+      routerConfig: mainRouter,
     );
   }
 }
