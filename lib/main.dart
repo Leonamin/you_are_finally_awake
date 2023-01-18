@@ -4,10 +4,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:you_are_finally_awake/core/data/datasource/constants.dart';
 import 'package:you_are_finally_awake/core/entity/destination_info.dart';
 import 'package:you_are_finally_awake/core/entity/location.dart';
+import 'package:you_are_finally_awake/di/location_service.dart';
+import 'package:you_are_finally_awake/di/service_locator.dart';
 import 'package:you_are_finally_awake/presentation/router/main_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setupLocator();
   await Hive.initFlutter();
   Hive.registerAdapter(LocationAdapter());
   Hive.registerAdapter(DestinationInfoAdapter());
@@ -23,6 +26,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Stateless는 빌드가 1번만 발생하니까 이렇게 써도 되지 않을까?
+    locator<LocationService>().requestService();
+    locator<LocationService>().grantPermission();
     return MaterialApp.router(
       title: 'Flutter Demo',
 
