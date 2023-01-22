@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:you_are_finally_awake/core/bindings/initial_binding.dart';
 import 'package:you_are_finally_awake/core/data/datasource/constants.dart';
 import 'package:you_are_finally_awake/core/entity/destination_info.dart';
 import 'package:you_are_finally_awake/core/entity/location.dart';
 import 'package:you_are_finally_awake/di/location_service.dart';
 import 'package:you_are_finally_awake/di/service_locator.dart';
-import 'package:you_are_finally_awake/presentation/router/main_router.dart';
+import 'package:you_are_finally_awake/presentation/router/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,9 +28,36 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    locator<LocationService>().requestService();
+    locator<LocationService>().grantPermission();
+
+    return GetMaterialApp.router(
+      title: 'YAFA',
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: seedColor,
+          brightness: Brightness.dark,
+        ),
+      ),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      initialBinding: InitialBinding(),
+      getPages: appPages,
+    );
+  }
+}
+
+/*
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     // Stateless는 빌드가 1번만 발생하니까 이렇게 써도 되지 않을까?
     locator<LocationService>().requestService();
     locator<LocationService>().grantPermission();
+    
     return MaterialApp.router(
       title: 'Flutter Demo',
 
@@ -55,3 +84,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+*/
