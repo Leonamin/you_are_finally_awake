@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:you_are_finally_awake/core/entity/location.dart';
+import 'package:you_are_finally_awake/presentation/values/app_values.dart';
 
 class DestinationInfoCard extends StatelessWidget {
   final String? title;
@@ -15,18 +16,16 @@ class DestinationInfoCard extends StatelessWidget {
     this.periodicMinute,
   });
 
-  final double defaultRadius = 12;
-
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: Theme.of(context).colorScheme.inversePrimary,
         shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(defaultRadius),
+        borderRadius: BorderRadius.circular(AppValues.radius_12),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(AppValues.halfPadding),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,7 +49,7 @@ class DestinationInfoCard extends StatelessWidget {
             // 버튼
             OutlinedButton(
               onPressed: () {},
-              child: Text(
+              child: const Text(
                 "Start!",
               ),
             )

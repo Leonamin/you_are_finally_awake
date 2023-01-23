@@ -21,7 +21,7 @@ void main() async {
   runApp(const MyApp());
 }
 
-const Color seedColor = Color.fromARGB(255, 22, 212, 108);
+const Color seedColor = Color.fromARGB(255, 45, 133, 160);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: seedColor,
-          brightness: Brightness.dark,
+          brightness: Brightness.light,
         ),
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
