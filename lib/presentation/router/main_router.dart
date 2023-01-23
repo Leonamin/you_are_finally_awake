@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
-import 'package:you_are_finally_awake/presentation/pages/create_destination/destination_setting_page.dart';
-import 'package:you_are_finally_awake/presentation/pages/home/home_page.dart';
+import 'package:you_are_finally_awake/presentation/modules/create_destination/destination_setting_page.dart';
+import 'package:you_are_finally_awake/presentation/modules/home/view/home_page.dart';
 import 'package:you_are_finally_awake/presentation/router/routes.dart';
 
 final mainRouter = GoRouter(
