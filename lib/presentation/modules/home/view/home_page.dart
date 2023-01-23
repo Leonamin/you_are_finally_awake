@@ -31,7 +31,36 @@ class HomePage extends StatelessWidget {
                   );
                 },
               ),
-              DestinationInfoList(dataModel: controller.destinationInfoList),
+              DestinationInfoList(
+                dataModel: controller.destinationInfoList,
+                onItemLongPressed: (index) {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("삭제하기"),
+                        content: Container(
+                          child: Text("정말로 삭제하시겠습니까?"),
+                        ),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                controller.deleteInfo(
+                                    controller.destinationInfoList[index].id);
+                                Get.back();
+                              },
+                              child: Text("삭제")),
+                          TextButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Text("취소")),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
             ],
           ),
         ),
