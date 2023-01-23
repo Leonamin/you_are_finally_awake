@@ -3,7 +3,7 @@ import 'package:you_are_finally_awake/core/entity/location.dart';
 
 class DestinationInfoCard extends StatelessWidget {
   final String? title;
-  final Location? location;
+  final LocationEntity? location;
   final double? radius;
   final int? periodicMinute;
 

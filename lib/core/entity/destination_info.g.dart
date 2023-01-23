@@ -19,7 +19,7 @@ class DestinationInfoAdapter extends TypeAdapter<DestinationInfo> {
     return DestinationInfo(
       id: fields[0] as int,
       title: fields[1] as String,
-      location: fields[2] as Location,
+      location: fields[2] as LocationEntity,
       radius: fields[3] as double,
       periodicMinute: fields[4] as int,
     );

@@ -14,7 +14,7 @@ class DestinationInfo extends Equatable {
   final String title;
   // 목적지 위치 없을리가 없겠지
   @HiveField(2)
-  final Location location;
+  final LocationEntity location;
   // 목적지 반경(meter) 없으면 기본 500m? 탑승물에 따라서 바꿔야할거 같음
   @HiveField(3)
   final double radius;

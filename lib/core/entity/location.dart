@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 part 'location.g.dart';
 
 @HiveType(typeId: 1)
-class Location extends Equatable {
+class LocationEntity extends Equatable {
   @HiveField(1)
   final double latitude;
   @HiveField(2)
@@ -12,7 +12,7 @@ class Location extends Equatable {
   @HiveField(3)
   final double altitude;
 
-  const Location(
+  const LocationEntity(
       {required this.latitude,
       required this.longitude,
       required this.altitude});

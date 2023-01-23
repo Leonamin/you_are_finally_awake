@@ -51,7 +51,7 @@ class _DestinationInfoListState extends State<DestinationInfoList> {
                         provider.addInfo(
                           CreateDestinationInfo(
                               title: "테스트",
-                              location: Location(
+                              location: LocationEntity(
                                 latitude: 37,
                                 longitude: 127,
                                 altitude: 0,

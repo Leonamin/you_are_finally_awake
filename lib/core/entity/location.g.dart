@@ -6,17 +6,17 @@ part of 'location.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class LocationAdapter extends TypeAdapter<Location> {
+class LocationAdapter extends TypeAdapter<LocationEntity> {
   @override
   final int typeId = 1;
 
   @override
-  Location read(BinaryReader reader) {
+  LocationEntity read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Location(
+    return LocationEntity(
       latitude: fields[1] as double,
       longitude: fields[2] as double,
       altitude: fields[3] as double,
@@ -24,7 +24,7 @@ class LocationAdapter extends TypeAdapter<Location> {
   }
 
   @override
-  void write(BinaryWriter writer, Location obj) {
+  void write(BinaryWriter writer, LocationEntity obj) {
     writer
       ..writeByte(3)
       ..writeByte(1)
