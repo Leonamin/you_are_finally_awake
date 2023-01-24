@@ -9,6 +9,9 @@ class DestinationSettingController extends GetxController {
     tag: (DestinationInfoRepositoryImpl).toString(),
   );
 
+  RxDouble currentRadius = 100.0.obs;
+  // double get currentRadius => _currentRadius.value;
+
   // 초기위치 서울 시청
   Rx<LocationEntity> _currentLocation =
       LocationEntity(latitude: 37.5666805, longitude: 126.9784147, altitude: 0)
@@ -28,5 +31,9 @@ class DestinationSettingController extends GetxController {
 
   LocationEntity getLocation() {
     return LocationEntity(latitude: 0, longitude: 0, altitude: 0);
+  }
+
+  void changeRadius(double value) {
+    currentRadius(value);
   }
 }
