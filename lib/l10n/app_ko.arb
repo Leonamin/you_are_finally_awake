@@ -1,3 +1,11 @@
 {
-  "helloWorld": "할로!"
+  "helloWorld": "할로!",
+  "createDestinationInfoWithMap" : "지도에서 찾기",
+  "favorite" : "즐겨찾기",
+  "lastLocation" : "마지막 위치",
+  "start" : "시작",
+  "deleteDialogTitle" : "삭제하기",
+  "delete" : "삭제",
+  "deleteExplanation" : "정말로 삭제하시겠습니까?",
+  "back" : "뒤로가기"
 }

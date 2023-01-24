@@ -5,6 +5,7 @@ import 'package:you_are_finally_awake/core/entity/location.dart';
 import 'package:you_are_finally_awake/presentation/modules/home/controllers/home_controller.dart';
 import 'package:you_are_finally_awake/presentation/modules/home/widgets/home_main_panel.dart';
 import 'package:you_are_finally_awake/presentation/modules/home/widgets/destination_info_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -38,10 +39,10 @@ class HomePage extends StatelessWidget {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text("삭제하기"),
-                        content: Container(
-                          child: Text("정말로 삭제하시겠습니까?"),
-                        ),
+                        title: Text(
+                            AppLocalizations.of(context)!.deleteDialogTitle),
+                        content: Text(
+                            AppLocalizations.of(context)!.deleteExplanation),
                         actions: [
                           TextButton(
                               onPressed: () {
@@ -49,12 +50,13 @@ class HomePage extends StatelessWidget {
                                     controller.destinationInfoList[index].id);
                                 Get.back();
                               },
-                              child: Text("삭제")),
+                              child:
+                                  Text(AppLocalizations.of(context)!.delete)),
                           TextButton(
                               onPressed: () {
                                 Get.back();
                               },
-                              child: Text("취소")),
+                              child: Text(AppLocalizations.of(context)!.back)),
                         ],
                       );
                     },

@@ -2,5 +2,13 @@
   "helloWorld": "Hello World!",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
-  }
+  },
+  "createDestinationInfoWithMap" : "Find on the map",
+  "favorite" : "Favorite",
+  "lastLocation" : "Last location",
+  "start" : "Start!",
+  "deleteDialogTitle" : "Delete",
+  "delete" : "Delete",
+  "deleteExplanation" : "Are you sure you want to delete it?",
+  "back" : "Back"
 }
