@@ -9,6 +9,7 @@ import 'package:you_are_finally_awake/core/entity/location.dart';
 import 'package:you_are_finally_awake/di/location_service.dart';
 import 'package:you_are_finally_awake/di/service_locator.dart';
 import 'package:you_are_finally_awake/presentation/router/app_pages.dart';
+import 'package:you_are_finally_awake/presentation/router/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +32,10 @@ class MyApp extends StatelessWidget {
     locator<LocationService>().requestService();
     locator<LocationService>().grantPermission();
 
-    return GetMaterialApp.router(
+    // .router를 쓰면
+    // Get.to~ 안되고
+    // Get.rootDelegate.to~를 써야한다.
+    return GetMaterialApp(
       title: 'YAFA',
       theme: ThemeData(
         useMaterial3: true,
@@ -43,7 +47,8 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       initialBinding: InitialBinding(),
-      getPages: appPages,
+      initialRoute: AppRoutes.HOME,
+      getPages: appPages(),
     );
   }
 }
