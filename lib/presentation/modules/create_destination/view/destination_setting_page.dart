@@ -46,6 +46,7 @@ class DestinationSettingPage extends GetView<DestinationSettingController> {
                                 MediaQuery.of(context).size.height * 0.75,
                             child: AspectRatio(
                               aspectRatio: 4 / 3,
+                              // 설정 탭
                               child: SingleChildScrollView(
                                 child: Padding(
                                   padding:

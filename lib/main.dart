@@ -29,9 +29,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    locator<LocationService>().requestService();
-    locator<LocationService>().grantPermission();
-
     // .router를 쓰면
     // Get.to~ 안되고
     // Get.rootDelegate.to~를 써야한다.
