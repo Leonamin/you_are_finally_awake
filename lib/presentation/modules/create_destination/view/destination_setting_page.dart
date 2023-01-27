@@ -16,10 +16,19 @@ class DestinationSettingPage extends GetView<DestinationSettingController> {
           Expanded(
             child: Stack(
               children: [
-                GoogleMap(
-                  initialCameraPosition: CameraPosition(
-                    target: controller.currentLatLng,
-                    zoom: 11,
+                Obx(
+                  () => GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      target: controller.currentLatLng,
+                      zoom: 11,
+                    ),
+                    onTap: (argument) {
+                      // controller.setDestination(
+                      //     argument.latitude, argument.longitude);
+                      controller.setDestinationMarker(
+                          argument.latitude, argument.longitude);
+                    },
+                    markers: Set.from(controller.markers),
                   ),
                 ),
                 SafeArea(
