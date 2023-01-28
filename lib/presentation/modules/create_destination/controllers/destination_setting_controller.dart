@@ -1,12 +1,15 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:you_are_finally_awake/core/data/repository/destination_info_repository.dart';
 import 'package:you_are_finally_awake/core/data/repository/destination_info_repository_impl.dart';
 import 'package:you_are_finally_awake/core/entity/create_destination_info.dart';
 import 'package:you_are_finally_awake/core/entity/location.dart';
 import 'package:you_are_finally_awake/presentation/router/app_routes.dart';
+import 'package:you_are_finally_awake/presentation/services/location_service.dart';
 
 class DestinationSettingController extends GetxController {
   static const String destinationMarkerId = 'destination';
@@ -16,17 +19,17 @@ class DestinationSettingController extends GetxController {
     tag: (DestinationInfoRepositoryImpl).toString(),
   );
 
-  // KM 단위
+  final LocationService _locationService = Get.find(
+    tag: (LocationService).toString(),
+  );
+
+  // M 단위
   RxDouble _destinationRadius = 100.0.obs;
   double get destinationRadius => _destinationRadius.value;
 
-  // 초기위치 서울 시청
-  Rx<LocationEntity> _currentLocation =
-      LocationEntity(latitude: 37.5666805, longitude: 126.9784147, altitude: 0)
-          .obs;
-  LocationEntity get currentLocation => _currentLocation.value;
-  LatLng get currentLatLng =>
-      LatLng(_currentLocation.value.latitude, _currentLocation.value.longitude);
+  // 초기위치 서울 시청 37.5666805,126.9784147
+  Rxn<LocationData?> get currentLocation => _locationService.currentLocation;
+  LatLng currentLatLng = const LatLng(37.5666805, 126.9784147);
 
   // 목적지 정보가 null이면 목적지 설정이 안된걸로 취급
   // 초기, 목적지 취소 = null
@@ -34,19 +37,26 @@ class DestinationSettingController extends GetxController {
   LocationEntity? get destination => _destination.value;
 
   // 구글맵 구성
+  Completer<GoogleMapController> googleMapController = Completer();
+
   RxList<Marker> _markers = RxList.empty();
   List<Marker> get markers => _markers;
 
   @override
   void onInit() {
+    _locationService.doPeriodicSensing(true);
+    _setCurrentLocation();
     _setCurrentMarker(currentLatLng.latitude, currentLatLng.longitude);
 
     ever(
-      _currentLocation,
+      currentLocation,
       (callback) {
         // TODO 목적지와 현재 위치를 비교해서 두 사이의 거리를 표시한다.
         debugPrint("현재 위치 변경");
-        _setCurrentMarker(currentLatLng.latitude, currentLatLng.longitude);
+        if (_setCurrentLocation()) {
+          _setCurrentMarker(currentLatLng.latitude, currentLatLng.longitude);
+          animateToMap(currentLatLng);
+        }
       },
     );
     ever(
@@ -61,8 +71,21 @@ class DestinationSettingController extends GetxController {
     super.onInit();
   }
 
-  LocationEntity getLocation() {
-    return LocationEntity(latitude: 0, longitude: 0, altitude: 0);
+  @override
+  void onClose() {
+    _locationService.doPeriodicSensing(false);
+    super.onClose();
+  }
+
+  bool _setCurrentLocation() {
+    if (currentLocation.value != null &&
+        currentLocation.value?.latitude != null &&
+        currentLocation.value?.longitude != null) {
+      currentLatLng = LatLng(
+          currentLocation.value!.latitude!, currentLocation.value!.longitude!);
+      return true;
+    }
+    return false;
   }
 
   // 데이터 설정
@@ -109,6 +132,13 @@ class DestinationSettingController extends GetxController {
     // FIXME 그냥 뒤로가기 해버리면 로딩이 안되는데 이것도 좋은 방법은 아님
     // 안드로이드 Flow나 LiveData처럼 데이터베이스 변경사항 발생시 홈 뷰모델로 변경사항이 전달되야함
     Get.offAllNamed(AppRoutes.HOME);
+  }
+
+  // 구글맵 지도 이동 관련
+  void animateToMap(LatLng currentLatLng, [double zoom = 11]) {
+    googleMapController.future.then((gmapController) =>
+        gmapController.animateCamera(CameraUpdate.newCameraPosition(
+            CameraPosition(target: currentLatLng, zoom: zoom))));
   }
 
   // 구글맵 마커 관련

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:location/location.dart';
 
@@ -7,14 +9,30 @@ class LocationService extends GetxService {
   bool _serviceEnabled = false;
   PermissionStatus _permissionGranted = PermissionStatus.denied;
   bool _doPeriodicSensing = false;
-  Rx<LocationData?> _currentLatLng = null.obs;
-  LocationData? get currentLatLng => _currentLatLng.value;
+  Rxn<LocationData?> currentLocation = Rxn<LocationData>();
+
+  Timer? _timer;
 
   @override
   void onInit() {
     super.onInit();
-    requestService();
-    grantPermission();
+    // requestService();
+    // grantPermission();
+    getLocation();
+  }
+
+  @override
+  void onReady() {
+    _startTimer();
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    if (_timer != null) {
+      _timer!.cancel();
+    }
+    super.onClose();
   }
 
   Future<bool> requestService() async {
@@ -47,7 +65,28 @@ class LocationService extends GetxService {
         return null;
       }
     }
+    final LocationData locationData = await location.getLocation();
+    currentLocation(locationData);
+    return locationData;
+  }
 
-    return location.getLocation();
+  void doPeriodicSensing(bool trigger) {
+    _doPeriodicSensing = trigger;
+  }
+
+  // TODO 포그라운드일 때만 되니까 백그라운드로 스위칭 할 때 꺼야함
+  _startTimer() {
+    const duration = Duration(seconds: 5);
+    _timer = Timer.periodic(duration, (Timer timer) {
+      if (_doPeriodicSensing) {
+        print("위치 갱신!");
+        location
+            .getLocation()
+            .timeout(const Duration(seconds: 4))
+            .then((value) {
+          currentLocation(value);
+        });
+      }
+    });
   }
 }

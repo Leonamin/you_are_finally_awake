@@ -27,6 +27,10 @@ class DestinationSettingPage extends GetView<DestinationSettingController> {
                           argument.latitude, argument.longitude);
                     },
                     markers: Set.from(controller.markers),
+                    onMapCreated: (gmapController) {
+                      // FIXME 화면 껏다 키면 메모리 할당 해제되서 controller를 잃어버리는거 같음...
+                      controller.googleMapController.complete(gmapController);
+                    },
                   ),
                 ),
                 SafeArea(
