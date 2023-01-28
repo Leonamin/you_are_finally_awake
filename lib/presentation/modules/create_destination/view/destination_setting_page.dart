@@ -23,9 +23,7 @@ class DestinationSettingPage extends GetView<DestinationSettingController> {
                       zoom: 11,
                     ),
                     onTap: (argument) {
-                      // controller.setDestination(
-                      //     argument.latitude, argument.longitude);
-                      controller.setDestinationMarker(
+                      controller.setDestination(
                           argument.latitude, argument.longitude);
                     },
                     markers: Set.from(controller.markers),
@@ -72,8 +70,8 @@ class DestinationSettingPage extends GetView<DestinationSettingController> {
                                       ),
                                       Obx(
                                         () => Slider(
-                                          value: controller.currentRadius.value,
-                                          label: controller.currentRadius
+                                          value: controller.destinationRadius,
+                                          label: controller.destinationRadius
                                               .round()
                                               .toString(),
                                           max: 1000.0,
@@ -109,7 +107,9 @@ class DestinationSettingPage extends GetView<DestinationSettingController> {
                 )),
                 Expanded(
                     child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.createData();
+                  },
                   child: Text("저장"),
                 )),
               ],
