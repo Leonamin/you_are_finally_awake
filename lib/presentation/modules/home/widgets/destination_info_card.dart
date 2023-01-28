@@ -41,7 +41,8 @@ class DestinationInfoCard extends StatelessWidget {
                   height: 16,
                 ),
                 Text(
-                  "Lat: ${location?.latitude ?? 0},   Lon: ${location?.longitude ?? 0}",
+                  "Lat: ${location?.latitude ?? 0}\nLon: ${location?.longitude ?? 0}",
+                  overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ],
