@@ -6,14 +6,11 @@ import 'package:you_are_finally_awake/core/bindings/initial_binding.dart';
 import 'package:you_are_finally_awake/core/data/datasource/constants.dart';
 import 'package:you_are_finally_awake/core/entity/destination_info.dart';
 import 'package:you_are_finally_awake/core/entity/location.dart';
-import 'package:you_are_finally_awake/di/location_service.dart';
-import 'package:you_are_finally_awake/di/service_locator.dart';
 import 'package:you_are_finally_awake/presentation/router/app_pages.dart';
 import 'package:you_are_finally_awake/presentation/router/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setupLocator();
   await Hive.initFlutter();
   Hive.registerAdapter(LocationAdapter());
   Hive.registerAdapter(DestinationInfoAdapter());
