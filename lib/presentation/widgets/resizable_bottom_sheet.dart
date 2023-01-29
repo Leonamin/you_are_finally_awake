@@ -28,7 +28,7 @@ class ResizableBottomSheet extends StatelessWidget {
         maxHeight: (maxHeight ?? constraints.maxHeight) - 20,
         minWidth: minWidth ?? constraints.minWidth,
         minHeight: (minHeight ?? constraints.minHeight) + 20,
-        backgroundColor: backgroundColor ?? Colors.white.withOpacity(.5),
+        backgroundColor: backgroundColor ?? Colors.white,
         child: child,
       ),
     );
@@ -85,10 +85,14 @@ class _ResizableBottomSheetState extends State<_ResizableBottomSheet> {
         Positioned(
           bottom: 0,
           left: left,
-          child: SizedBox(
-            height: height,
-            width: width,
-            child: widget.child,
+          child: Padding(
+            padding:
+                const EdgeInsets.only(top: ManipulatingBar.defaultBarHeight),
+            child: SizedBox(
+              height: height,
+              width: width,
+              child: widget.child,
+            ),
           ),
         ),
         Positioned(

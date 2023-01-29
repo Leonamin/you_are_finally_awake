@@ -56,7 +56,7 @@ class _ManipulatingBarState extends State<ManipulatingBar> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppValues.radius),
-          color: widget.color ?? ManipulatingBar.defaultBarColor,
+          color: Colors.transparent,
         ),
         width: widget.width ?? ManipulatingBar.defaultBarWidth,
         height: widget.height ?? ManipulatingBar.defaultBarHeight,
@@ -64,7 +64,7 @@ class _ManipulatingBarState extends State<ManipulatingBar> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppValues.radius),
-              color: widget.innerColor ?? ManipulatingBar.defaultBarInnerColor,
+              color: widget.innerColor ?? ManipulatingBar.defaultBarColor,
             ),
             width: (widget.width ?? ManipulatingBar.defaultBarWidth) * 0.7,
             height: (widget.height ?? ManipulatingBar.defaultBarHeight) * 0.3,
