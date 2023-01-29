@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:you_are_finally_awake/core/data/repository/destination_info_repository.dart';
+import 'package:you_are_finally_awake/core/domain/repository/destination_info_repository.dart';
 import 'package:you_are_finally_awake/core/data/repository/destination_info_repository_impl.dart';
-import 'package:you_are_finally_awake/core/entity/create_destination_info.dart';
+import 'package:you_are_finally_awake/core/domain/entity/create_destination_info_entity.dart';
 import 'package:you_are_finally_awake/presentation/mapper/destination_info_ui_data_mapper.dart';
 import 'package:you_are_finally_awake/presentation/models/destination_info_ui_data.dart';
 
@@ -34,7 +34,7 @@ class HomeController extends GetxController {
     }
   }
 
-  void addInfo(CreateDestinationInfo createInfo) async {
+  void addInfo(CreateDestinationInfoEntity createInfo) async {
     try {
       int key = await _repository.createDestinationInfo(createInfo);
       debugPrint('추가된 키 $key');
@@ -47,7 +47,7 @@ class HomeController extends GetxController {
     }
   }
 
-  void updateInfo(int infoId, CreateDestinationInfo createInfo) async {
+  void updateInfo(int infoId, CreateDestinationInfoEntity createInfo) async {
     try {
       int key = await _repository.updateDestinationInfoById(infoId, createInfo);
       debugPrint('업데이트된 키 $key');

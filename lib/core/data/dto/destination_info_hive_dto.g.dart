@@ -1,32 +1,33 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'destination_info.dart';
+part of 'destination_info_hive_dto.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class DestinationInfoAdapter extends TypeAdapter<DestinationInfo> {
+class DestinationInfoHiveDTOAdapter
+    extends TypeAdapter<DestinationInfoHiveDTO> {
   @override
   final int typeId = 0;
 
   @override
-  DestinationInfo read(BinaryReader reader) {
+  DestinationInfoHiveDTO read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return DestinationInfo(
+    return DestinationInfoHiveDTO(
       id: fields[0] as int,
       title: fields[1] as String,
-      location: fields[2] as LocationEntity,
+      location: fields[2] as dynamic,
       radius: fields[3] as double,
       periodicMinute: fields[4] as int,
     );
   }
 
   @override
-  void write(BinaryWriter writer, DestinationInfo obj) {
+  void write(BinaryWriter writer, DestinationInfoHiveDTO obj) {
     writer
       ..writeByte(5)
       ..writeByte(0)
@@ -47,7 +48,7 @@ class DestinationInfoAdapter extends TypeAdapter<DestinationInfo> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is DestinationInfoAdapter &&
+      other is DestinationInfoHiveDTOAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

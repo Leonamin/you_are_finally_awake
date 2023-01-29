@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:you_are_finally_awake/core/data/repository/destination_info_repository.dart';
+import 'package:you_are_finally_awake/core/domain/entity/location_info_entity.dart';
+import 'package:you_are_finally_awake/core/domain/repository/destination_info_repository.dart';
 import 'package:you_are_finally_awake/core/data/repository/destination_info_repository_impl.dart';
-import 'package:you_are_finally_awake/core/entity/create_destination_info.dart';
-import 'package:you_are_finally_awake/core/entity/location.dart';
+import 'package:you_are_finally_awake/core/domain/entity/create_destination_info_entity.dart';
 import 'package:you_are_finally_awake/presentation/router/app_routes.dart';
 import 'package:you_are_finally_awake/presentation/services/location_service.dart';
 
@@ -33,8 +33,8 @@ class DestinationSettingController extends GetxController {
 
   // 목적지 정보가 null이면 목적지 설정이 안된걸로 취급
   // 초기, 목적지 취소 = null
-  Rxn<LocationEntity?> _destination = Rxn<LocationEntity>();
-  LocationEntity? get destination => _destination.value;
+  Rxn<LocationInfoEntity?> _destination = Rxn<LocationInfoEntity>();
+  LocationInfoEntity? get destination => _destination.value;
 
   // 구글맵 구성
   Completer<GoogleMapController> googleMapController = Completer();
@@ -90,8 +90,7 @@ class DestinationSettingController extends GetxController {
 
   // 데이터 설정
   void setDestination(double latitude, double longitude) {
-    _destination(
-        LocationEntity(latitude: latitude, longitude: longitude, altitude: 0));
+    _destination(LocationInfoEntity(latitude: latitude, longitude: longitude));
   }
 
   void changeRadius(double value) {
@@ -116,13 +115,13 @@ class DestinationSettingController extends GetxController {
       );
       return;
     }
-    final CreateDestinationInfo newItem = CreateDestinationInfo(
+    final CreateDestinationInfoEntity newItem = CreateDestinationInfoEntity(
       // TODO 목적지 정보 생성 제목
       title: '',
-      location: LocationEntity(
-          latitude: destination!.latitude,
-          longitude: destination!.longitude,
-          altitude: 0),
+      location: LocationInfoEntity(
+        latitude: destination!.latitude,
+        longitude: destination!.longitude,
+      ),
       radius: destinationRadius,
       // TODO 목적지 정보 생성 위치 확인 주기
       periodicMinute: 1,

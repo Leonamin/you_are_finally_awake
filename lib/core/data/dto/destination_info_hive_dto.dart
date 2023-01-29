@@ -1,11 +1,10 @@
-import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:you_are_finally_awake/core/entity/location.dart';
+import 'package:you_are_finally_awake/core/data/dto/location_info_hive_dto.dart';
 
-part 'destination_info.g.dart';
+part 'destination_info_hive_dto.g.dart';
 
 @HiveType(typeId: 0)
-class DestinationInfo extends Equatable {
+class DestinationInfoHiveDTO {
   // 정보 순서 없으면 안됨
   @HiveField(0)
   final int id;
@@ -14,7 +13,7 @@ class DestinationInfo extends Equatable {
   final String title;
   // 목적지 위치 없을리가 없겠지
   @HiveField(2)
-  final LocationEntity location;
+  final LocationInfoHiveDTO location;
   // 목적지 반경(meter) 없으면 기본 500m? 탑승물에 따라서 바꿔야할거 같음
   @HiveField(3)
   final double radius;
@@ -22,19 +21,11 @@ class DestinationInfo extends Equatable {
   @HiveField(4)
   final int periodicMinute;
 
-  const DestinationInfo({
+  const DestinationInfoHiveDTO({
     required this.id,
     required this.title,
     required this.location,
     required this.radius,
     required this.periodicMinute,
   });
-  @override
-  List<Object?> get props => [
-        id,
-        title,
-        location,
-        radius,
-        periodicMinute,
-      ];
 }

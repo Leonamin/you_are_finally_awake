@@ -4,17 +4,17 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:you_are_finally_awake/core/bindings/initial_binding.dart';
 import 'package:you_are_finally_awake/core/data/datasource/constants.dart';
-import 'package:you_are_finally_awake/core/entity/destination_info.dart';
-import 'package:you_are_finally_awake/core/entity/location.dart';
+import 'package:you_are_finally_awake/core/data/dto/destination_info_hive_dto.dart';
+import 'package:you_are_finally_awake/core/data/dto/location_info_hive_dto.dart';
 import 'package:you_are_finally_awake/presentation/router/app_pages.dart';
 import 'package:you_are_finally_awake/presentation/router/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive.registerAdapter(LocationAdapter());
-  Hive.registerAdapter(DestinationInfoAdapter());
-  await Hive.openBox<DestinationInfo>(hiveBoxDestinationInfo);
+  Hive.registerAdapter(LocationInfoHiveDTOAdapter());
+  Hive.registerAdapter(DestinationInfoHiveDTOAdapter());
+  await Hive.openBox<DestinationInfoHiveDTO>(hiveBoxDestinationInfo);
 
   runApp(const MyApp());
 }

@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'location.dart';
+part of 'location_info_hive_dto.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class LocationAdapter extends TypeAdapter<LocationEntity> {
+class LocationInfoHiveDTOAdapter extends TypeAdapter<LocationInfoHiveDTO> {
   @override
   final int typeId = 1;
 
   @override
-  LocationEntity read(BinaryReader reader) {
+  LocationInfoHiveDTO read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return LocationEntity(
+    return LocationInfoHiveDTO(
       latitude: fields[1] as double,
       longitude: fields[2] as double,
       altitude: fields[3] as double,
@@ -24,7 +24,7 @@ class LocationAdapter extends TypeAdapter<LocationEntity> {
   }
 
   @override
-  void write(BinaryWriter writer, LocationEntity obj) {
+  void write(BinaryWriter writer, LocationInfoHiveDTO obj) {
     writer
       ..writeByte(3)
       ..writeByte(1)
@@ -41,7 +41,7 @@ class LocationAdapter extends TypeAdapter<LocationEntity> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is LocationAdapter &&
+      other is LocationInfoHiveDTOAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

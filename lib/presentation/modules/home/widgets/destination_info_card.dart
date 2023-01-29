@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:you_are_finally_awake/core/entity/location.dart';
+import 'package:you_are_finally_awake/core/domain/entity/location_info_entity.dart';
 import 'package:you_are_finally_awake/presentation/values/app_values.dart';
 
 class DestinationInfoCard extends StatelessWidget {
   final String? title;
-  final LocationEntity? location;
+  final LocationInfoEntity? location;
   final double? radius;
   final int? periodicMinute;
 
