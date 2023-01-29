@@ -8,6 +8,7 @@ class LocationInfoEntity extends Equatable {
 
   const LocationInfoEntity({required this.latitude, required this.longitude});
 
+  // return type: meters
   double distanceBetween(double lat, double lon) {
     double lat1 = _radiansFromDegrees(latitude);
     double lon1 = _radiansFromDegrees(longitude);

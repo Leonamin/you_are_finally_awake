@@ -5,7 +5,7 @@ class DestinationInfoEntity extends Equatable {
   final int id;
   final String title;
   final LocationInfoEntity locationInfo;
-  final double radius;
+  final double radius; // meters
   final int periodicMinute;
 
   const DestinationInfoEntity({
@@ -15,6 +15,13 @@ class DestinationInfoEntity extends Equatable {
     required this.radius,
     required this.periodicMinute,
   });
+
+  bool isInArea(double lat, double lon) {
+    if (locationInfo.distanceBetween(lat, lon) < radius) {
+      return true;
+    }
+    return false;
+  }
 
   @override
   List<Object?> get props => [
