@@ -8,6 +8,7 @@ import 'package:you_are_finally_awake/core/domain/entity/location_info_entity.da
 import 'package:you_are_finally_awake/core/domain/repository/destination_info_repository.dart';
 import 'package:you_are_finally_awake/core/data/repository/destination_info_repository_impl.dart';
 import 'package:you_are_finally_awake/core/domain/entity/create_destination_info_entity.dart';
+import 'package:you_are_finally_awake/core/values/constants.dart';
 import 'package:you_are_finally_awake/presentation/router/app_routes.dart';
 import 'package:you_are_finally_awake/presentation/services/location_service.dart';
 
@@ -24,7 +25,7 @@ class DestinationSettingController extends GetxController {
   );
 
   // M 단위
-  RxDouble _destinationRadius = 100.0.obs;
+  RxDouble _destinationRadius = Constants.defaultDestinationRadius.obs;
   double get destinationRadius => _destinationRadius.value;
 
   // 초기위치 서울 시청 37.5666805,126.9784147
@@ -42,13 +43,18 @@ class DestinationSettingController extends GetxController {
   RxList<Marker> _markers = RxList.empty();
   List<Marker> get markers => _markers;
 
+  // 상태 관리
+  TextEditingController titleController = TextEditingController();
+
   @override
   void onInit() {
     _locationService.doPeriodicSensing(true);
     _setCurrentLocation();
     _setCurrentMarker(currentLatLng.latitude, currentLatLng.longitude);
+    animateToMap(currentLatLng);
 
-    ever(
+    // 계속 카메라를 움직이면 방해가 된다.
+    once(
       currentLocation,
       (callback) {
         // TODO 목적지와 현재 위치를 비교해서 두 사이의 거리를 표시한다.
@@ -77,6 +83,8 @@ class DestinationSettingController extends GetxController {
     super.onClose();
   }
 
+  // 데이터 설정
+
   bool _setCurrentLocation() {
     if (currentLocation.value != null &&
         currentLocation.value?.latitude != null &&
@@ -88,13 +96,30 @@ class DestinationSettingController extends GetxController {
     return false;
   }
 
-  // 데이터 설정
   void setDestination(double latitude, double longitude) {
     _destination(LocationInfoEntity(latitude: latitude, longitude: longitude));
+
+    // 테스트
+    // print(_destination.value
+    //     ?.distanceBetween(currentLatLng.latitude, currentLatLng.longitude));
+    // if (_destination.value != null) {
+    //   if (_destination.value!.distanceBetween(
+    //           currentLatLng.latitude, currentLatLng.longitude) <
+    //       100) {
+    //     print('하핳');
+    //   }
+    // }
   }
 
   void changeRadius(double value) {
     _destinationRadius(value);
+  }
+
+  String formatDestinationRadius() {
+    if (destinationRadius < 1000.0) {
+      return "${destinationRadius.round()}m";
+    }
+    return "${(destinationRadius / 1000).toStringAsFixed(3)}km";
   }
 
   bool validateSettings() {
@@ -117,7 +142,7 @@ class DestinationSettingController extends GetxController {
     }
     final CreateDestinationInfoEntity newItem = CreateDestinationInfoEntity(
       // TODO 목적지 정보 생성 제목
-      title: '',
+      title: titleController.text,
       location: LocationInfoEntity(
         latitude: destination!.latitude,
         longitude: destination!.longitude,

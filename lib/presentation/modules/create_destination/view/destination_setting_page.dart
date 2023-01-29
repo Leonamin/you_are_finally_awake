@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:you_are_finally_awake/core/values/constants.dart';
 import 'package:you_are_finally_awake/presentation/modules/create_destination/controllers/destination_setting_controller.dart';
 import 'package:you_are_finally_awake/presentation/values/app_values.dart';
 import 'package:you_are_finally_awake/presentation/widgets/resizable_bottom_sheet.dart';
@@ -66,23 +67,71 @@ class DestinationSettingPage extends GetView<DestinationSettingController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "목적지 도착 범위",
+                                      // 이름 설정
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          TextFormField(
+                                            controller:
+                                                controller.titleController,
+                                            decoration: const InputDecoration(
+                                              hintText: '목적지 이름',
+                                            ),
+                                            maxLength: Constants
+                                                .maxDestinationInfoTitleLength,
+                                          ),
+                                        ],
                                       ),
                                       const SizedBox(
                                         height: 12,
                                       ),
-                                      Obx(
-                                        () => Slider(
-                                          value: controller.destinationRadius,
-                                          label: controller.destinationRadius
-                                              .round()
-                                              .toString(),
-                                          max: 1000.0,
-                                          onChanged: (value) {
-                                            controller.changeRadius(value);
-                                          },
-                                        ),
+                                      // 범위 설정
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "목적지 도착 범위",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium,
+                                          ),
+                                          const SizedBox(
+                                            height: 4,
+                                          ),
+                                          SliderTheme(
+                                            data: SliderThemeData(
+                                                overlayShape:
+                                                    SliderComponentShape
+                                                        .noOverlay),
+                                            child: Obx(
+                                              () => Slider(
+                                                value: controller
+                                                    .destinationRadius,
+                                                label: controller
+                                                    .destinationRadius
+                                                    .round()
+                                                    .toString(),
+                                                max: Constants
+                                                    .maxDestinationRadius,
+                                                min: Constants
+                                                    .minDestinationRadius,
+                                                onChanged: (value) {
+                                                  controller
+                                                      .changeRadius(value);
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.topRight,
+                                            child: Obx(
+                                              () => Text(controller
+                                                  .formatDestinationRadius()),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),

@@ -5,4 +5,7 @@ class Constants {
   static const double maxDestinationRadius = 10000.0;
   // 기본 범위 3000M 역삼역 ~ 서초역 사이 거리
   static const double defaultDestinationRadius = 3000.0;
+
+  // 목적지 최대 이름 길이 byte
+  static const int maxDestinationInfoTitleLength = 20;
 }
