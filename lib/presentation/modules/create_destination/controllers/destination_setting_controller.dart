@@ -14,6 +14,7 @@ import 'package:you_are_finally_awake/presentation/services/location_service.dar
 
 class DestinationSettingController extends GetxController {
   static const String destinationMarkerId = 'destination';
+  static const String destinationCircleId = 'destination';
   static const String currentMarkerId = 'current';
 
   final DestinationInfoRepository _repository = Get.find(
@@ -43,6 +44,9 @@ class DestinationSettingController extends GetxController {
   RxList<Marker> _markers = RxList.empty();
   List<Marker> get markers => _markers;
 
+  RxList<Circle> _circles = RxList.empty();
+  List<Circle> get circles => _circles;
+
   // 상태 관리
   TextEditingController titleController = TextEditingController();
 
@@ -71,9 +75,14 @@ class DestinationSettingController extends GetxController {
         debugPrint("목적지 변경");
         if (destination != null) {
           _setDestinationMarker(destination!.latitude, destination!.longitude);
+          _setDestinationRangeCircle(
+              destination!.latitude, destination!.longitude);
         }
       },
     );
+    ever(_destinationRadius, (callback) {
+      _setDestinationRangeCircle(destination!.latitude, destination!.longitude);
+    });
     super.onInit();
   }
 
@@ -185,6 +194,9 @@ class DestinationSettingController extends GetxController {
     final Marker marker = Marker(
       markerId: const MarkerId(destinationMarkerId),
       draggable: true,
+      onDragStart: (value) {
+        _deleteDestinationRangeCircle();
+      },
       onDragEnd: (value) {
         setDestination(value.latitude, value.longitude);
       },
@@ -197,5 +209,24 @@ class DestinationSettingController extends GetxController {
   void _deleteDestinationMarker() {
     _markers.removeWhere(
         (element) => element.markerId.value == destinationMarkerId);
+  }
+
+  void _setDestinationRangeCircle(double latitude, double longitude) {
+    _circles.removeWhere(
+        (element) => element.circleId.value == destinationCircleId);
+    final Circle circle = Circle(
+      circleId: const CircleId(destinationCircleId),
+      radius: destinationRadius,
+      center: LatLng(latitude, longitude),
+      strokeColor: Colors.transparent,
+      fillColor: Colors.green.withOpacity(0.3),
+      strokeWidth: 0,
+    );
+    _circles.add(circle);
+  }
+
+  void _deleteDestinationRangeCircle() {
+    _circles.removeWhere(
+        (element) => element.circleId.value == destinationCircleId);
   }
 }
