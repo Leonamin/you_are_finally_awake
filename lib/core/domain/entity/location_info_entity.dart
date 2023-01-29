@@ -9,11 +9,11 @@ class LocationInfoEntity extends Equatable {
   const LocationInfoEntity({required this.latitude, required this.longitude});
 
   double distanceBetween(double lat, double lon) {
-    double lat1 = latitude;
-    double lon1 = longitude;
+    double lat1 = _radiansFromDegrees(latitude);
+    double lon1 = _radiansFromDegrees(longitude);
 
-    double lat2 = lat;
-    double lon2 = lon;
+    double lat2 = _radiansFromDegrees(lat);
+    double lon2 = _radiansFromDegrees(lon);
 
     const double earthRadius = 6378137.0; // WGS84 major axis
     double distance = 2 *
@@ -38,6 +38,8 @@ class LocationInfoEntity extends Equatable {
     return 1000 * 12742 * asin(sqrt(a));
   }
   */
+
+  double _radiansFromDegrees(final double degrees) => degrees * (pi / 180.0);
 
   @override
   List<Object?> get props => [
