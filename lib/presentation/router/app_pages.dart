@@ -3,6 +3,8 @@ import 'package:you_are_finally_awake/presentation/modules/create_destination/co
 import 'package:you_are_finally_awake/presentation/modules/create_destination/view/destination_setting_page.dart';
 // import 'package:you_are_finally_awake/presentation/modules/create_destination/destination_setting_page.dart';
 import 'package:you_are_finally_awake/presentation/modules/home/view/home_page.dart';
+import 'package:you_are_finally_awake/presentation/modules/tracking/controllers/tracking_controller.dart';
+import 'package:you_are_finally_awake/presentation/modules/tracking/view/tracking_page.dart';
 
 import 'app_routes.dart';
 
@@ -17,6 +19,15 @@ appPages() => [
         binding: BindingsBuilder(
           () {
             Get.put(DestinationSettingController());
+          },
+        ),
+      ),
+      GetPage(
+        name: AppRoutes.TRACKING,
+        page: () => TrackingPage(),
+        binding: BindingsBuilder(
+          () {
+            Get.put(TrackingController());
           },
         ),
       ),
