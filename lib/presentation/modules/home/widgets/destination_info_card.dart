@@ -7,6 +7,7 @@ class DestinationInfoCard extends StatelessWidget {
   final LocationInfoEntity? location;
   final double? radius;
   final int? periodicMinute;
+  final Function()? onStartPressed;
 
   const DestinationInfoCard({
     super.key,
@@ -14,6 +15,7 @@ class DestinationInfoCard extends StatelessWidget {
     this.location,
     this.radius,
     this.periodicMinute,
+    this.onStartPressed,
   });
 
   @override
@@ -32,6 +34,7 @@ class DestinationInfoCard extends StatelessWidget {
           children: [
             // 정보
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title ?? "Destination",
@@ -45,11 +48,19 @@ class DestinationInfoCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
+                const SizedBox(
+                  height: 4,
+                ),
+                Text(
+                  "Range: ${(radius ?? 0).round()}m",
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
               ],
             ),
             // 버튼
             OutlinedButton(
-              onPressed: () {},
+              onPressed: onStartPressed,
               child: const Text(
                 "Start!",
               ),

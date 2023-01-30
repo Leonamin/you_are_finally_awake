@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:you_are_finally_awake/presentation/models/destination_info_ui_data.dart';
 import 'package:you_are_finally_awake/presentation/modules/home/widgets/destination_info_card.dart';
+import 'package:you_are_finally_awake/presentation/router/app_routes.dart';
 import 'package:you_are_finally_awake/presentation/values/app_values.dart';
 
 class DestinationInfoList extends StatelessWidget {
@@ -39,6 +41,11 @@ class DestinationInfoList extends StatelessWidget {
               child: DestinationInfoCard(
                 title: dataModel[index].title,
                 location: dataModel[index].location,
+                radius: dataModel[index].radius,
+                onStartPressed: () {
+                  Get.toNamed(AppRoutes.TRACKING,
+                      arguments: dataModel[index].id);
+                },
               ),
             ),
           );
