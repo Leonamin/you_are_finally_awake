@@ -12,6 +12,6 @@ class CreateDestinationInfoDTOMapper
         title: object.title,
         location: mapper.reverseMap(object.location),
         radius: object.radius,
-        periodicMinute: object.periodicMinute);
+        periodicMinute: object.periodicSecond);
   }
 }

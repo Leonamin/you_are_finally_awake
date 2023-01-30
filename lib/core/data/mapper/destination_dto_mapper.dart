@@ -13,6 +13,6 @@ class DestinationDTOMapper
         title: object.title,
         locationInfo: mapper.map(object.location),
         radius: object.radius,
-        periodicMinute: object.periodicMinute);
+        periodicSecond: object.periodicMinute);
   }
 }

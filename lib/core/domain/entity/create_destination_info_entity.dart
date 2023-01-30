@@ -9,19 +9,19 @@ class CreateDestinationInfoEntity extends Equatable {
   // 목적지 반경(meter) 없으면 기본 500m? 탑승물에 따라서 바꿔야할거 같음
   final double radius;
   // 위치 확인 간격 (필요한지 모르겠음)
-  final int periodicMinute;
+  final int periodicSecond;
 
   const CreateDestinationInfoEntity({
     required this.title,
     required this.location,
     required this.radius,
-    required this.periodicMinute,
+    required this.periodicSecond,
   });
   @override
   List<Object?> get props => [
         title,
         location,
         radius,
-        periodicMinute,
+        periodicSecond,
       ];
 }

@@ -11,7 +11,7 @@ class DestinationInfoUiDataMapper
       title: object.title,
       location: object.locationInfo,
       radius: object.radius,
-      periodicMinute: object.periodicMinute,
+      periodicSecond: object.periodicSecond,
     );
   }
 }

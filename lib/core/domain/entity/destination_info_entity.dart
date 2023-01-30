@@ -6,14 +6,14 @@ class DestinationInfoEntity extends Equatable {
   final String title;
   final LocationInfoEntity locationInfo;
   final double radius; // meters
-  final int periodicMinute;
+  final int periodicSecond;
 
   const DestinationInfoEntity({
     required this.id,
     required this.title,
     required this.locationInfo,
     required this.radius,
-    required this.periodicMinute,
+    required this.periodicSecond,
   });
 
   bool isInArea(double lat, double lon) {
@@ -29,6 +29,6 @@ class DestinationInfoEntity extends Equatable {
         title,
         locationInfo,
         radius,
-        periodicMinute,
+        periodicSecond,
       ];
 }

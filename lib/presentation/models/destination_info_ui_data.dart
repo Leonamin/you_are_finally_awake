@@ -6,14 +6,14 @@ class DestinationInfoUiData extends Equatable {
   final String title;
   final LocationInfoEntity location;
   final double radius;
-  final int periodicMinute;
+  final int periodicSecond;
 
   const DestinationInfoUiData({
     required this.id,
     required this.title,
     required this.location,
     required this.radius,
-    required this.periodicMinute,
+    required this.periodicSecond,
   });
   @override
   List<Object?> get props => [
@@ -21,6 +21,6 @@ class DestinationInfoUiData extends Equatable {
         title,
         location,
         radius,
-        periodicMinute,
+        periodicSecond,
       ];
 }

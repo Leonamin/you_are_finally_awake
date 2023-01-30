@@ -158,7 +158,7 @@ class DestinationSettingController extends GetxController {
       ),
       radius: destinationRadius,
       // TODO 목적지 정보 생성 위치 확인 주기
-      periodicMinute: 1,
+      periodicSecond: 60,
     );
     _repository.createDestinationInfo(newItem);
 
