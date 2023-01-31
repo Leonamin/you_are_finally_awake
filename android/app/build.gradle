@@ -40,6 +40,7 @@ android {
     ndkVersion flutter.ndkVersion
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -64,6 +65,7 @@ android {
         manifestPlaceholders += [
             GOOGLE_MAPS_PLATFORM_API_KEY: dartEnvironmentVariables.GOOGLE_MAPS_PLATFORM_API_KEY
         ]
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -81,4 +83,7 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+    implementation 'androidx.window:window:1.0.0'
+    implementation 'androidx.window:window-java:1.0.0'
 }

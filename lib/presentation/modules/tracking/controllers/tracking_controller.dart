@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:you_are_finally_awake/core/data/repository/destination_info_repository_impl.dart';
 import 'package:you_are_finally_awake/core/domain/entity/location_info_entity.dart';
 import 'package:you_are_finally_awake/core/domain/usecase/tracking_usecase.dart';
+import 'package:you_are_finally_awake/main.dart';
 import 'package:you_are_finally_awake/presentation/services/location_service.dart';
 
 class TrackingController extends GetxController {
@@ -49,7 +51,8 @@ class TrackingController extends GetxController {
     };
     _trackingUsecase.notifyHasArrived = () {
       print("도착 완료!");
-      Get.snackbar("도착", "도착함!", backgroundColor: Colors.green);
+      // Get.snackbar("도착", "도착함!", backgroundColor: Colors.green);
+      _createNotification();
       // TODO Complete Screen
     };
     _trackingUsecase.updateLocation = () async {
@@ -152,5 +155,25 @@ class TrackingController extends GetxController {
   void _deleteDestinationRangeCircle() {
     _circles.removeWhere(
         (element) => element.circleId.value == destinationCircleId);
+  }
+
+  void _createNotification() async {
+    const AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+      '0',
+      'arrivedPush',
+      channelDescription: 'arrvicePush',
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: 'ticker',
+    );
+    const NotificationDetails notificationDetails =
+        NotificationDetails(android: androidNotificationDetails);
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      '도착 알람',
+      '도착했습니다!',
+      notificationDetails,
+    );
   }
 }
